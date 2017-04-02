@@ -72,3 +72,21 @@ int TablePixel::get_horizontal_border_details(int border_no, ObjDetails *details
 	details->width = start_pos.first + 1 ;
 	return SUCCESS;
 }
+
+int TablePixel::get_cell_details(int row_no,int column_no, ObjDetails *details){
+	std::pair<int, int> start, end;
+	if(get_start_position(row_no, column_no, &start) != SUCCESS){
+		return INVALID_INDEX;
+	}
+	if(get_end_position(row_no, column_no, &end) != SUCCESS){
+		return INVALID_INDEX;
+	}
+
+	details->x = start.first;
+	details->y = start.second;
+
+	details->height = end.second - start.second;
+	details->width = end.first - start.first;
+
+	return SUCCESS;
+}
